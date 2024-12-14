@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #413c3c;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.video-item {
+    text-align: center;
+    background: #918d8d;
+    padding: 10px;
+    /* border: 1px solid #ddd; */
+}
+
+.thumbnail {
+    position: relative;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+.duration {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.video-item:hover {
+    /* color: gray; */
+    border: 1px solid #ddd;
+}
+
+a {
+    color: rgb(77, 57, 57); /* Цвет ссылки */
+    text-decoration: none; 
+}
+a:hover {
+    color: rgba(255, 0, 0, 0.616); /* Цвет ссылки при наведении */
+}
+
+a:visited {
+    color: gray; /* Цвет посещенной ссылки */
+}
+
+a:active {
+    color: rgb(209, 62, 99); /* Цвет при нажатии */
+}

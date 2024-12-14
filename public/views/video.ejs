@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title><%= video.title %></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 5%;
+        }
+
+        .main-content {
+            flex: 2;
+            margin-right: 20px;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .video-info {
+            margin-top: 20px;
+        }
+
+        .video-info h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .buttons button {
+            background: #ddd;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            background: #bbb;
+        }
+
+        .channel-info {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .channel-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .description {
+            margin-top: 20px;
+        }
+
+        .description button {
+            display: block;
+            margin: 10px 0;
+            background: #ddd;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comments-section {
+            margin-top: 20px;
+        }
+
+        .comments-section textarea {
+            width: 100%;
+            resize: none;
+            height: 60px;
+        }
+
+        .comments-section button {
+            display: none;
+            margin-top: 5px;
+            background: #ddd;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comments-section textarea:focus + button {
+            display: inline-block;
+        }
+
+        .suggested-videos {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .suggested-videos h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .suggested-videos ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .suggested-videos li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/profile">Профиль</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="video-player">
+                <video src="<%= video.path %>" controls></video>
+            </div>
+            <div class="video-info">
+                <h1><%= video.title %></h1>
+                <div class="buttons">
+                    <button>👍 <%= video.likes %></button>
+                    <button>👎 <%= video.dislikes %></button>
+                </div>
+                <div class="channel-info">
+                    <img src="<%= video.channelIcon %>" alt="Channel Icon">
+                    <div>
+                        <p><strong><%= video.channelName %></strong></p>
+                        <p><%= video.subscribers %> подписчиков</p>
+                        <button>Подписаться</button>
+                    </div>
+                </div>
+                <p><%= video.views %> просмотров</p>
+                <p>Добавлено: <%= video.dateAdded %></p>
+                <div class="description">
+                    <p id="description-text"><%= video.description %></p>
+                    <button onclick="toggleDescription()">Показать больше</button>
+                </div>
+            </div>
+            <div class="comments-section">
+                <h2>Комментарии</h2>
+                <textarea placeholder="Оставьте комментарий..."></textarea>
+                <button>Отправить</button>
+                <div class="comments">
+                    <% video.comments.forEach(comment => { %>
+                        <p><strong><%= comment.author %></strong>: <%= comment.text %></p>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested Videos -->
+        <div class="suggested-videos">
+            <h2>Другие видео</h2>
+            <ul>
+                <% suggestedVideos.forEach(suggested => { %>
+                    <li>
+                        <a href="/video/<%= suggested.id %>"><%= suggested.title %></a>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleDescription() {
+            const description = document.getElementById('description-text');
+            const button = event.target;
+            if (button.innerText === 'Показать больше') {
+                description.style.whiteSpace = 'normal';
+                button.innerText = 'Свернуть';
+            } else {
+                description.style.whiteSpace = 'nowrap';
+                button.innerText = 'Показать больше';
+            }
+        }
+    </script>
+</body>
+</html>
