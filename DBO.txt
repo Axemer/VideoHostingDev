@@ -1,0 +1,124 @@
+CREATE DATABASE video_hosting;
+
+USE video_hosting;
+
+-- Таблица users
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    nickname VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    avatar TEXT,
+    subscriptions JSON,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('anonymous', 'regular', 'confirmed', 'vip', 'tester', 'special_1', 'special_2', 'special_3', 'special_4', 'special_5', 'special_6', 'special_7', 'special_8', 'special_9', 'special_10', 'moderator', 'admin', 'super_admin', 'creator', 'banned', 'on_hold') DEFAULT 'regular',
+    rating INT DEFAULT 0
+);
+
+-- Таблица videos
+CREATE TABLE videos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author_id BIGINT NOT NULL,
+    views INT DEFAULT 0,
+    likes INT DEFAULT 0,
+    dislikes INT DEFAULT 0,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    thumbnail TEXT,
+    video_file TEXT NOT NULL,
+    duration TIME,
+    description TEXT,
+    tags JSON,
+    FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+-- Таблица comments
+CREATE TABLE comments (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    video_id BIGINT NOT NULL,
+    author_id BIGINT NOT NULL,
+    text TEXT NOT NULL,
+    attachment TEXT,
+    likes INT DEFAULT 0,
+    dislikes INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (video_id) REFERENCES videos(id),
+    FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+-- Таблица tags
+CREATE TABLE tags (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Таблица video_tags
+CREATE TABLE video_tags (
+    video_id BIGINT NOT NULL,
+    tag_id BIGINT NOT NULL,
+    PRIMARY KEY (video_id, tag_id),
+    FOREIGN KEY (video_id) REFERENCES videos(id),
+    FOREIGN KEY (tag_id) REFERENCES tags(id)
+);
+
+вызов для базы
+
+Структура базы данных -------------------------------------------------------------------------
+
+Таблица users (пользователи)
+Содержит данные о пользователях.
+
+Поле	Тип данных	Описание
+id	    BIGINT	Уникальный ID пользователя (Primary Key).
+username	VARCHAR(50)	Имя пользователя.
+nickname	VARCHAR(50)	Никнейм.
+password	VARCHAR(255)	Хэшированный пароль.
+avatar	TEXT	URL аватара пользователя.
+subscriptions	JSON	Список подписок (ID каналов).
+description	TEXT	Описание профиля.
+created_at	TIMESTAMP	Дата регистрации.
+status	ENUM	Статус (например: anonymous, vip, banned).
+rating	INT	Рейтинг пользователя.
+Таблица videos (видео)
+Содержит информацию о загруженных видео.
+
+Поле	Тип данных	Описание
+id	    BIGINT	Уникальный ID видео (Primary Key).
+title	VARCHAR(255)	Название видео.
+author_id	BIGINT	ID автора (внешний ключ на users.id).
+views	INT	Количество просмотров.
+likes	INT	Количество положительных оценок.
+dislikes	INT	Количество отрицательных оценок.
+uploaded_at	TIMESTAMP	Дата загрузки видео.
+thumbnail	TEXT	URL миниатюры (иконки).
+video_file	TEXT	URL видеофайла.
+duration	TIME	Длительность видео.
+description	TEXT	Описание видео.
+tags	JSON	Список тегов (внешняя связь с таблицей tags).
+Таблица comments (комментарии)
+Содержит комментарии к видео.
+
+Поле	Тип данных	Описание
+id	BIGINT	Уникальный ID комментария (Primary Key).
+video_id	BIGINT	ID видео (внешний ключ на videos.id).
+author_id	BIGINT	ID автора комментария (внешний ключ на users.id).
+text	TEXT	Текст комментария.
+attachment	TEXT	URL приложения (если есть).
+likes	INT	Количество положительных оценок.
+dislikes	INT	Количество отрицательных оценок.
+created_at	TIMESTAMP	Дата написания комментария.
+Таблица tags (теги)
+Содержит информацию о тегах.
+
+Поле	Тип данных	Описание
+id	BIGINT	Уникальный ID тега (Primary Key).
+name	VARCHAR(50)	Название тега.
+Таблица video_tags (связь видео с тегами)
+Реализует связь "многие ко многим" между видео и тегами.
+
+Поле	Тип данных	Описание
+video_id	BIGINT	ID видео (внешний ключ на videos.id).
+tag_id	BIGINT	ID тега (внешний ключ на tags.id).
+
+-----------------------------------------------------------------------------------------------------
