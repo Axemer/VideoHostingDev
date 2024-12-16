@@ -64,7 +64,7 @@ a:hover {
 }
 
 a:visited {
-    color: gray; /* Цвет посещенной ссылки */
+    color: rgb(105, 65, 65); /* Цвет посещенной ссылки */
 }
 
 a:active {

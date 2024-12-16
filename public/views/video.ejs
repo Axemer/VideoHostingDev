@@ -200,10 +200,18 @@
         <div class="suggested-videos">
             <h2>Другие видео</h2>
             <ul>
-                <% suggestedVideos.forEach(suggested => { %>
-                    <li>
-                        <a href="/video/<%= suggested.id %>"><%= suggested.title %></a>
-                    </li>
+                <% suggestedVideos.forEach(video => { %>
+                    <div class="video-item">
+                        <a href="/video/<%= video.id %>">
+                            <div class="thumbnail">
+                                <img src="<%= video.thumbnail %>" alt="<%= video.title %>">
+                                <span class="duration"><%= video.duration %></span>
+                            </div>
+                            <h3><%= video.title %></h3>
+                            <p>Автор: <%= video.author %></p>
+                            <p>Просмотры: <%= video.views %></p>
+                        </a>
+                    </div>
                 <% }); %>
             </ul>
         </div>
