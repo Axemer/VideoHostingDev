@@ -161,7 +161,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="video-player">
-                <video src="<%= video.path %>" controls></video>
+                <video src="<%= path %>" controls></video>
             </div>
             <div class="video-info">
                 <h1><%= video.title %></h1>
@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <p><%= video.views %> просмотров</p>
-                <p>Добавлено: <%= video.dateAdded %></p>
+                <p>Добавлено: <%= uploadDate %></p>
                 <div class="description">
                     <p id="description-text"><%= video.description %></p>
                     <button onclick="toggleDescription()">Показать больше</button>
@@ -189,10 +189,15 @@
                 <textarea placeholder="Оставьте комментарий..."></textarea>
                 <button>Отправить</button>
                 <div class="comments">
-                    <% video.comments.forEach(comment => { %>
-                        <p><strong><%= comment.author %></strong>: <%= comment.text %></p>
-                    <% }); %>
+                    <% if (comments.length > 0) { %>
+                        <% comments.forEach(comment => { %>
+                            <p><strong><%= comment.author %></strong>: <%= comment.text %></p>
+                        <% }); %>
+                    <% } else { %>
+                        <p>Нет комментариев. Напишите первый комментарий!</p>
+                    <% } %>
                 </div>
+                
             </div>
         </div>
 
@@ -205,7 +210,7 @@
                         <a href="/video/<%= video.id %>">
                             <div class="thumbnail">
                                 <img src="<%= video.thumbnail %>" alt="<%= video.title %>">
-                                <span class="duration"><%= video.duration %></span>
+                                <span class="duration"><%= videoDuration %></span>
                             </div>
                             <h3><%= video.title %></h3>
                             <p>Автор: <%= video.author %></p>

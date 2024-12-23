@@ -5,6 +5,7 @@ const path = require('path');
 
 const app = express();
 const pool = require('./models/database'); // Подключаем базу данных
+const getVideoDuration = require('./models/utils');
 
 const PORT = 3000;
 
@@ -36,21 +37,23 @@ function listVideos() {
 // Главная страница
 app.get('/', async (req, res) => {
     try {
-
-        // Старая реализация в старой копии там все в коментах есть
-        // БЫЛА УСТАНОВЛЕНА ВРЕМЕННАЯ СИСТЕМА С МАССОВОМ ПОТОМ НАДО УБРАТЬ НЕ ПОТЕРЯЙ ЭТУ МЫСЛЬ ПЖ
-        // ТУТ РАНЕЕ БЫЛА ЛОГИКА ПО ФЕТЧУ ВИДЕО БЕЗ ГОТОВОГО МАССИВА
-
         // Запрос для получения списка видео
-        const result = await pool.query('SELECT * FROM videos'); 
+        const result = await pool.query('SELECT * FROM videos');
         const videos = result.rows;
 
-        res.render('index', { videos });
+        // Обогащение каждого видео его длительностью
+        const enrichedVideos = videos.map(video => ({
+            ...video,
+            duration: getVideoDuration(video) // Добавляем поле "duration" с вызовом функции
+        }));
+
+        res.render('index', { videos: enrichedVideos });
     } catch (err) {
         console.error('Ошибка обработки видео:', err);
         res.status(500).send('Ошибка сервера');
     }
 });
+
 }
 
 // инитка для листа видео на главной странице
@@ -69,15 +72,30 @@ function SetVideo(){
                 return res.status(404).send('Видео не найдено');
             }
     
+            console.log(video.id);           
+            console.log(video.title);        
+            console.log(video.description); 
+            console.log(video.uploaded_at)
+            console.log(video.video_file)
+            console.log(video.duration)
             // Получение комментариев к видео
-            const commentsResult = await pool.query('SELECT * FROM comments WHERE video_id = $1 ORDER BY created_at DESC', [videoId]);
+            const commentsResult = await pool.query('SELECT * FROM post_comments WHERE video_id = $1 ORDER BY created_at DESC', [videoId]);
             const comments = commentsResult.rows;
     
             // Получение списка рекомендуемых видео
             const suggestedResult = await pool.query('SELECT * FROM videos WHERE id != $1 LIMIT 10', [videoId]);
             const suggestedVideos = suggestedResult.rows;
+
+            // Получение даты выхода
+            //const uploadDate = video.uploaded_at
+            const uploadDate = new Date(video.uploaded_at).toLocaleDateString('ru-RU');
+
+            // указываем путь на видеофайл
+            const path = video.video_file
+
+            const videoDuration = getVideoDuration(video)
     
-            res.render('video', { video, comments, suggestedVideos });
+            res.render('video', { video, comments, suggestedVideos, uploadDate, path, videoDuration });
         } catch (err) {
             console.error('Ошибка загрузки видео:', err);
             res.status(500).send('Ошибка загрузки видео');

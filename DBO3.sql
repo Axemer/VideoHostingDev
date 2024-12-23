@@ -1,0 +1,9 @@
+CREATE ROLE SiteBackRole;   
+
+
+
+GRANT ALL PRIVILEGES ON TABLE post_comments TO SiteBackRole;
+GRANT ALL PRIVILEGES ON TABLE tags TO SiteBackRole;
+GRANT ALL PRIVILEGES ON TABLE users TO SiteBackRole;
+GRANT ALL PRIVILEGES ON TABLE videos TO SiteBackRole;
+GRANT ALL PRIVILEGES ON TABLE video_tags TO SiteBackRole;

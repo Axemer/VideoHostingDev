@@ -1,0 +1,2 @@
+INSERT INTO videos (author_id, title,           description,       "views", likes, dislikes,  thumbnail,                                       video_file,                                                duration)
+VALUES             ('1',       'Test video 3', 'test description', '901',   '12',   '4',      '/Debug/Images/brainless confusion.jpg',    '/Debug/Videos/Test video placeholder.mp4', '00:00:10');
