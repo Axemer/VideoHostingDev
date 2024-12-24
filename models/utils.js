@@ -1,7 +1,7 @@
 //const ffmpeg = require('fluent-ffmpeg'); // ранее использовалось для вычисления сколько видос длится
 //const parseInterval = require('postgres-interval');
 
-// Функция для получения длительности видео
+// Старая Функция для получения длительности видео
  function getVideoDuration(videoPath) {
      return new Promise((resolve, reject) => {
          ffmpeg.ffprobe(videoPath, (err, metadata) => {
@@ -13,15 +13,17 @@
          });
      });
  }
- //Функция для получения длительности видео
 
+ // старая функция для фетча id видоса
 function getVideoId(videoName){
      videos.forEach(element => {
          if (element.title == videoName)
              return element.id
      });
  }
-const parseInterval = (interval) => {
+
+ // парсит интервалы posgres в перменные времени
+let parseInterval = (interval) => {
     const hours = interval.hours || 0; // Часы, если есть
     const minutes = interval.minutes || 0; // Минуты, если есть
     const seconds = interval.seconds || 0; // Секунды
@@ -29,8 +31,8 @@ const parseInterval = (interval) => {
     return { hours, minutes, seconds };
 };
 
-
-const intervalToTime = (interval) => {
+// форматирует из времени в читаемый формат врмение MM:SS или HH:MM:SS
+let intervalToTime = (interval) => {
     const { hours, minutes, seconds } = interval;
 
     // Если меньше часа, возвращаем MM:SS
@@ -42,15 +44,9 @@ const intervalToTime = (interval) => {
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
-
-
-/// Форматирование длительности видео в читаемый форма
+/// Форматирование длительности видео в читаемый формаn
 function getVideoDuration(video){
-    // 
-    const rawInterval = video.duration; // Значение из базы данных
-    const interval = parseInterval(rawInterval);
-    const videoDuration = intervalToTime(interval);
-    return videoDuration
+    return intervalToTime(parseInterval(video.duration))
 }
 
 

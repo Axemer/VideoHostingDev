@@ -42,6 +42,8 @@
                     <button onclick="toggleDescription()">Показать больше</button>
                 </div>
             </div>
+
+            <!-- Comment section -->
             <div class="comments-section">
                 <h2>Комментарии</h2>
                 <textarea placeholder="Оставьте комментарий..."></textarea>
@@ -57,6 +59,7 @@
                 </div>
                 
             </div>
+
         </div>
 
         <!-- Suggested Videos -->
@@ -65,7 +68,7 @@
             <ul>
                 <% suggestedVideos.forEach(video => { %>
                     <div class="video-item">
-                        <a href="/video/<%= video.id %>">
+                        <a href="/watch/<%= video.id %>">
                             <div class="thumbnail">
                                 <img src="<%= video.thumbnail %>" alt="<%= video.title %>">
                                 <span class="duration"><%= videoDuration %></span>
