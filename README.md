@@ -1,4 +1,4 @@
-# curs-dev-test
+# Video Hosting site Development
 
 
 Для БД будем использовать в идеал Postgres или MySQL если пост не заведется в итоге 
