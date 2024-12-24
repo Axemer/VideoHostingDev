@@ -27,7 +27,7 @@ function SetVideo(app){
             const comments = commentsResult.rows;
     
             // Получение списка рекомендуемых видео
-            const suggestedResult = await pool.query('SELECT * FROM videos WHERE id != $1 LIMIT 10', [videoId]);
+            const suggestedResult = await pool.query('SELECT * FROM videos WHERE id != $1 LIMIT 20', [videoId]);
             const suggestedVideos = suggestedResult.rows;
 
             // Получение даты выхода

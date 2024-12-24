@@ -38,9 +38,20 @@
         }
 
         .video-player {
+            position: relative;
+            width: 100%; /* Ширина занимает всю доступную область */
+            padding-top: 56.25%; /* Соотношение сторон 16:9 */
+            background-color: #000; /* Черный фон для эстетики */
+            overflow: hidden; /* Чтобы избежать вылазания содержимого */
+        }
+
+        .video-player video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
+            height: 100%;
+            object-fit: contain; /* Обеспечивает сохранение пропорций */
         }
 
         .video-info {
