@@ -60,7 +60,7 @@ app.get('/', async (req, res) => {
 listVideos();
 
 function SetVideo(){
-    app.get('/video/:id', async (req, res) => {
+    app.get('/watch/:id', async (req, res) => {
         const videoId = req.params.id;
     
         try {
@@ -95,7 +95,7 @@ function SetVideo(){
 
             const videoDuration = getVideoDuration(video)
     
-            res.render('video', { video, comments, suggestedVideos, uploadDate, path, videoDuration });
+            res.render('watch', { video, comments, suggestedVideos, uploadDate, path, videoDuration });
         } catch (err) {
             console.error('Ошибка загрузки видео:', err);
             res.status(500).send('Ошибка загрузки видео');

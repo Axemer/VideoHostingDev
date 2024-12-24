@@ -47,6 +47,7 @@ CREATE TABLE comments (
 -- Таблица tags
 CREATE TABLE tags (
     id BIGSERIAL PRIMARY KEY,
+    type VARCHAR(50)
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
