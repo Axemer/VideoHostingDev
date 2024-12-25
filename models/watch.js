@@ -49,6 +49,9 @@ function SetVideo(app){
 
             // Вычисляем сколько длится видио
             videoDuration = getVideoDuration(video)
+
+            // Увеличиваем число просмотров
+            await pool.query('UPDATE videos SET views = views + 1 WHERE id = $1', [videoId]);
     
             res.render('watch', { video, comments, suggestedVideos, uploadDate, path, videoDuration });
         } catch (err) {
