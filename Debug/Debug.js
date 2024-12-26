@@ -6,3 +6,4 @@ const videos = [
     { id: '4', title: 'pokemon anim', path: '/videos/pokemon anim.mp4', thumbnail: '/Debug/Images/pokemon anim.PNG', author: 'Канал 4', views: 3000, duration: '7:20', description: 'Описание видео 4', comments: [{ author: 'Пользователь 1', text: 'Отличное видео!' },{ author: 'Пользователь 2', text: 'Спасибо за информацию.' }] }
 ];
 // Данные для видео (заменить реальной логикой) DEBUG !!!!!!!!!!
+

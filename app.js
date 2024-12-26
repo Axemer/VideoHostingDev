@@ -1,17 +1,17 @@
 // Подтягиваем зависимости 
 const express = require('express');
 const path = require('path');
-
 const app = express();
 const listVideos = require('./models/Index');
 const SetVideo = require('./models/watch')
 
+// порт на котором будет хостится сайт
 const PORT = 3000;
 
 // Устанавливаем папки для видео и изображений
 const videosPath = path.join(__dirname, './Debug/Videos');
 const imagesPath = path.join(__dirname, './Debug/Images');
-const placeholderImage = '/Debug/Images/brainless confusion.jpg'; // Заглушка для иконок
+const placeholderImage = '/Resorces/brainless confusion.jpg'; // Заглушка для иконок
 
 // Устанавливаем статические папки
 app.use('/videos', express.static(videosPath));
@@ -22,7 +22,8 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './public/views');
 
-// инитка для листа видео на главной странице
+
+// инициализация для списка видео на главной странице
 listVideos(app);
 
 // инициализация видео
