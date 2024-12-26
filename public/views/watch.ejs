@@ -70,7 +70,7 @@
                     <div class="video-item">
                         <a href="/watch/<%= video.id %>">
                             <div class="thumbnail">
-                                <img src="<%= video.thumbnail %>" alt="<%= video.title %>">
+                                <img src="<%= video.thumbnail %>" alt="<%= video.title %>"  onerror="this.onerror=null; this.src='/Resorces/brainless confusion.jpg';">
                                 <span class="duration"><%= videoDuration %></span>
                             </div>
                             <h3><%= video.title %></h3>

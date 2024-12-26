@@ -11,7 +11,7 @@ const PORT = 3000;
 // Устанавливаем папки для видео и изображений
 const videosPath = path.join(__dirname, './Debug/Videos');
 const imagesPath = path.join(__dirname, './Debug/Images');
-const placeholderImage = '/Resorces/brainless confusion.jpg'; // Заглушка для иконок
+//const placeholderImage = './Resorces/brainless confusion.jpg'; // Заглушка для иконок
 
 // Устанавливаем статические папки
 app.use('/videos', express.static(videosPath));
