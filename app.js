@@ -22,13 +22,11 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './public/views');
 
-
 // инициализация для списка видео на главной странице
 listVideos(app);
 
 // инициализация видео
 SetVideo(app);
-
 
 // Запуск сервера
 app.listen(PORT, () => {

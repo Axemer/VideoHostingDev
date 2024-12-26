@@ -690,7 +690,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="466SSra6KNYRiZpYgtTw" name="база данных">
-    <mxGraphModel dx="264" dy="393" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="660" dy="983" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1467,7 +1467,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="9JVqWzXG2YbbXogOj_pE" name="Страница — 10">
+  <diagram id="9JVqWzXG2YbbXogOj_pE" name="idef0 черный ящик">
     <mxGraphModel dx="546" dy="813" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
