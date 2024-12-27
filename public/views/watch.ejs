@@ -11,7 +11,7 @@
     <header>
         <nav>
             <a href="/">Главная</a>
-            <a href="/profile">Профиль</a>
+            <!-- <a href="/profile">Профиль</a> -->
         </nav>
     </header>
 
@@ -23,7 +23,7 @@
             </div>
             <div class="video-info">
                 <h1><%= video.title %></h1>
-                <div class="buttons">
+                <!-- <div class="buttons">
                     <button>👍 <%= video.likes %></button>
                     <button>👎 <%= video.dislikes %></button>
                 </div>
@@ -34,17 +34,17 @@
                         <p><%= video.subscribers %> подписчиков</p>
                         <button>Подписаться</button>
                     </div>
-                </div>
+                </div> -->
                 <p><%= video.views %> просмотров</p>
                 <p>Добавлено: <%= uploadDate %></p>
                 <div class="description">
                     <p id="description-text"><%= video.description %></p>
-                    <button onclick="toggleDescription()">Показать больше</button>
+                    <!-- <button onclick="toggleDescription()">Показать больше</button> -->
                 </div>
             </div>
 
             <!-- Comment section -->
-            <div class="comments-section">
+            <!-- <div class="comments-section">
                 <h2>Комментарии</h2>
                 <textarea placeholder="Оставьте комментарий..."></textarea>
                 <button>Отправить</button>
@@ -58,7 +58,7 @@
                     <% } %>
                 </div>
                 
-            </div>
+            </div> -->
 
         </div>
 
@@ -71,10 +71,10 @@
                         <a href="/watch/<%= video.id %>">
                             <div class="thumbnail">
                                 <img src="<%= video.thumbnail %>" alt="<%= video.title %>"  onerror="this.onerror=null; this.src='/Resorces/brainless confusion.jpg';">
-                                <span class="duration"><%= videoDuration %></span>
+                                <!-- <span class="duration"><%= videoDuration %></span> -->
                             </div>
                             <h3><%= video.title %></h3>
-                            <p>Автор: <%= video.author %></p>
+                            <!-- <p>Автор: <%= video.author %></p> -->
                             <p>Просмотры: <%= video.views %></p>
                         </a>
                     </div>
