@@ -17,6 +17,7 @@ header nav a {
     margin-right: 20px;
 }
 
+
 .video-grid {
     display: grid;
     /* grid-template-columns: repeat(5, 1fr); */
@@ -94,7 +95,7 @@ header nav a {
         transition: transform 0.22s ease;
     }
     .thumbnail:hover {
-        transform: scale(1.05);
+        transform: scale(1.15);
     }
     .thumbnail:hover {
         max-width: 320px; /* Ограничение при увеличении */
@@ -107,7 +108,7 @@ header nav a {
 }
 
 a {
-    color: rgb(77, 57, 57); /* Цвет ссылки */
+    color: rgb(255, 255, 255); /* Цвет ссылки */
     text-decoration: none; 
 }
 a:hover {
@@ -115,7 +116,7 @@ a:hover {
 }
 
 a:visited {
-    color: rgb(105, 65, 65); /* Цвет посещенной ссылки */
+    color: rgba(255, 190, 190, 0.945); /* Цвет посещенной ссылки */
 }
 
 a:active {
