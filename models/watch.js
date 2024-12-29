@@ -1,4 +1,4 @@
-const getVideoDuration = require('./utils');
+const getVideoDuration = require('./utils'); // Подключаем утилиту для вычисления длительности видео
 const pool = require('./database'); // Подключаем базу данных
 
 // выделяем поля 
@@ -25,13 +25,6 @@ function SetVideo(app){
             if (!video) {
                 return res.status(404).send('Видео не найдено');
             }
-    
-            // console.log(video.id);           
-            // console.log(video.title);        
-            // console.log(video.description); 
-            // console.log(video.uploaded_at)
-            // console.log(video.video_file)
-            // console.log(video.duration)
 
             // Получение комментариев к видео
             commentsResult = await pool.query('SELECT * FROM post_comments WHERE video_id = $1 ORDER BY created_at DESC', [videoId]);

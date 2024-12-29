@@ -22,7 +22,7 @@ function getVideoId(videoName){
      });
  }
 
- // парсит интервалы posgres в перменные времени
+// парсит интервалы posgres в перменные времени
 let parseInterval = (interval) => {
     const hours = interval.hours || 0; // Часы, если есть
     const minutes = interval.minutes || 0; // Минуты, если есть

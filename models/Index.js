@@ -1,6 +1,4 @@
-//const express = require('express');
 const pool = require('./database'); // Подключаем базу данных
-//const app = express();
 const getVideoDuration = require('./utils');
 
 let result;
@@ -8,8 +6,6 @@ let videos;
 let enrichedVideos;
 
 function listVideos(app) {
-    //// Часть с фетчером видео с папки
-    // Главная страница
     app.get('/', async (req, res) => {
         try {
             // Запрос для получения списка видео

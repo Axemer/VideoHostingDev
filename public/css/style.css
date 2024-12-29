@@ -17,7 +17,6 @@ header nav a {
     margin-right: 20px;
 }
 
-
 .video-grid {
     display: grid;
     /* grid-template-columns: repeat(5, 1fr); */
