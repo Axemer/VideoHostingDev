@@ -1,6 +1,12 @@
 //const ffmpeg = require('fluent-ffmpeg'); // ранее использовалось для вычисления сколько видос длится
 //const parseInterval = require('postgres-interval');
 
+// для ffmpeg которых тепрь 2 почему так? Потому что. Лучше 2 разных чем 1 аутофдейт заброшенный.
+const ffmpeg = require("fluent-ffmpeg");
+const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+ffmpeg.setFfmpegPath(ffmpegPath);
+// для ffmpeg которых тепрь 2
+
 // Старая Функция для получения длительности видео
  function getVideoDuration(videoPath) {
      return new Promise((resolve, reject) => {
