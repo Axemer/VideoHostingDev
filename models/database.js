@@ -12,9 +12,9 @@ const pool = new Pool({
 // Проверка подключения
 pool.connect((err, client, release) => {
     if (err) {
-        console.error('Ошибка подключения к базе данных:', err.stack);
+        console.error('Ошибка подключения к базе данных:', err.stack, '\n проверь службу постгри');
     } else {
-        console.log('Успешное подключение к базе данных');
+        console.log('Успешное подключение к базе данных по ', pool.host);
         release();
     }
 });
