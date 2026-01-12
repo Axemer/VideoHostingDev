@@ -11,6 +11,10 @@
     "pg": "^8.16.3",
     "postgres-interval": "^4.0.2"
   },
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=10.0.0"
+  },
   "name": "curs-dev-test",
   "version": "1.0.0",
   "main": "index.js",
