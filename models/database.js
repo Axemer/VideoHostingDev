@@ -1,22 +1,17 @@
+require('dotenv').config();
+
 const { Pool } = require('pg');
 
-// Настройки подключения к базе данных
 const pool = new Pool({
-    user: 'VideoHostingWebSite-Alae',        // Имя пользователя PostgreSQL
-    host: 'localhost',            // Хост базы данных
-    database: 'video_hosting',    // Имя базы данных
-    password: "+=UDjoYW99tR:sT&FfRaU^a;37Dmr#sUj.ZtD-o>V%3DyqwW>p9aWcgFY",    // Пароль пользователя
-    port: 5432,                   // Порт подключения
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: parseInt(process.env.DB_PORT, 10),
 });
 
-// Проверка подключения
-pool.connect((err, client, release) => {
-    if (err) {
-        console.error('Ошибка подключения к базе данных:', err.stack, '\n проверь службу постгри');
-    } else {
-        console.log('Успешное подключение к базе данных по ', pool.host);
-        release();
-    }
-});
+pool.connect()
+    .then(() => console.log('Успешное подключение к базе данных'))
+    .catch(err => console.error('Ошибка подключения к базе данных:', err.message));
 
 module.exports = pool;

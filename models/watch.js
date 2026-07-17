@@ -1,56 +1,29 @@
+const pool = require('./database');
 const getVideoDuration = require('./utils');
-const pool = require('./database'); // Подключаем базу данных
 
-// выделяем поля 
-let commentsResult = null;
-let videoResult = null;
-let video = null;
-let videoId = null;
-let comments = null;
-let suggestedResult = null;
-let suggestedVideos = null;
-let uploadDate = null;
-let path = null;
-let videoDuration = null;
-
-function SetVideo(app){
+function SetVideo(app) {
     app.get('/watch/:id', async (req, res) => {
-        videoId = req.params.id;
-    
+        const videoId = req.params.id;
+
         try {
-            // Получение данных о выбранном видео
-            videoResult = await pool.query('SELECT * FROM videos WHERE id = $1', [videoId]);
-            video = videoResult.rows[0];
-    
+            const videoResult = await pool.query('SELECT * FROM videos WHERE id = $1', [videoId]);
+            const video = videoResult.rows[0];
+
             if (!video) {
                 return res.status(404).send('Видео не найдено');
             }
-    
-            // console.log(video.id);           
-            // console.log(video.title);        
-            // console.log(video.description); 
-            // console.log(video.uploaded_at)
-            // console.log(video.video_file)
-            // console.log(video.duration)
 
-            // Получение комментариев к видео
-            commentsResult = await pool.query('SELECT * FROM post_comments WHERE video_id = $1 ORDER BY created_at DESC', [videoId]);
-            comments = commentsResult.rows;
-    
-            // Получение списка рекомендуемых видео
-            suggestedResult = await pool.query('SELECT * FROM videos WHERE id != $1 LIMIT 20', [videoId]);
-            suggestedVideos = suggestedResult.rows;
+            const commentsResult = await pool.query('SELECT * FROM comments WHERE video_id = $1 ORDER BY created_at DESC', [videoId]);
+            const comments = commentsResult.rows;
 
-            // Получение даты выхода
-            uploadDate = new Date(video.uploaded_at).toLocaleDateString('ru-RU');
+            const suggestedResult = await pool.query('SELECT * FROM videos WHERE id != $1 LIMIT 20', [videoId]);
+            const suggestedVideos = suggestedResult.rows;
 
-            // указываем путь на видеофайл
-            path = video.video_file
+            const uploadDate = new Date(video.uploaded_at).toLocaleDateString('ru-RU');
+            const videoPath = video.video_file;
+            const videoDuration = getVideoDuration(video);
 
-            // Вычисляем сколько длится видио
-            videoDuration = getVideoDuration(video)
-    
-            res.render('watch', { video, comments, suggestedVideos, uploadDate, path, videoDuration });
+            res.render('watch', { video, comments, suggestedVideos, uploadDate, path: videoPath, videoDuration });
         } catch (err) {
             console.error('Ошибка загрузки видео:', err);
             res.status(500).send('Ошибка загрузки видео');

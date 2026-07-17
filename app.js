@@ -1,6 +1,6 @@
-// Подтягиваем зависимости 
+require('dotenv').config();
+
 const express = require('express');
-const path = require('path');
 
 const app = express();
 const listVideos = require('./models/Index');
@@ -8,28 +8,23 @@ const SetVideo = require('./models/watch')
 
 const PORT = 3000;
 
-// Устанавливаем папки для видео и изображений
-const videosPath = path.join(__dirname, './Debug/Videos');
-const imagesPath = path.join(__dirname, './Debug/Images');
-const placeholderImage = '/Debug/Images/brainless confusion.jpg'; // Заглушка для иконок
-
-// Устанавливаем статические папки
-app.use('/videos', express.static(videosPath));
-app.use('/Debug/Images', express.static(imagesPath));
+app.use('/Debug/Images', express.static('Debug/Images'));
 app.use(express.static('public'));
 
-// Настройка шаблонизатора
 app.set('view engine', 'ejs');
 app.set('views', './public/views');
 
-// инитка для листа видео на главной странице
-listVideos(app);
+app.get('/profile', (req, res) => {
+    res.render('profile');
+});
 
-// инициализация видео
+app.get('/chanel', (req, res) => {
+    res.render('chanel');
+});
+
+listVideos(app);
 SetVideo(app);
 
-
-// Запуск сервера
 app.listen(PORT, () => {
     console.log(`Сервер запущен на http://localhost:${PORT}`);
 });

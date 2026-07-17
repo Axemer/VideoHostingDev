@@ -39,7 +39,7 @@
                 <p>Добавлено: <%= uploadDate %></p>
                 <div class="description">
                     <p id="description-text"><%= video.description %></p>
-                    <button onclick="toggleDescription()">Показать больше</button>
+                    <button onclick="toggleDescription(event)">Показать больше</button>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                         <a href="/watch/<%= video.id %>">
                             <div class="thumbnail">
                                 <img src="<%= video.thumbnail %>" alt="<%= video.title %>">
-                                <span class="duration"><%= videoDuration %></span>
+                                <span class="duration"><%= video.duration %></span>
                             </div>
                             <h3><%= video.title %></h3>
                             <p>Автор: <%= video.author %></p>
@@ -84,9 +84,9 @@
     </div>
 
     <script>
-        function toggleDescription() {
+        function toggleDescription(e) {
             const description = document.getElementById('description-text');
-            const button = event.target;
+            const button = e.target;
             if (button.innerText === 'Показать больше') {
                 description.style.whiteSpace = 'normal';
                 button.innerText = 'Свернуть';
